@@ -5,6 +5,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from . forms import UserRegistrationForm
+
+
 @login_required
 def index(request):
     template = 'accounts/index.html'
@@ -31,3 +34,16 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('accounts:login'))
+
+def user_registration(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = UserRegistrationForm(data = request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('accounts:index'))
+    else:
+        form = UserRegistrationForm()
+    context = {'form': form}
+    template = 'accounts/registration.html'
+    return render(request, template, context)
