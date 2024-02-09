@@ -1,3 +1,4 @@
+
 <!-- Ваш_проект/ваш_приложение/templates/login.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +62,7 @@
     </style>
 </head>
 <body>
-    <form method="post" action="">
+    <form method="post" action="{% url 'accounts:login' %}" method="post">
         {% csrf_token %}
         <h2>Login</h2>
 
@@ -69,11 +70,13 @@
             <p class="error">{{ error }}</p>
         {% endif %}
 
-        <label for="username">Username:</label>
+        {{ form.as_p }}
+
+        <!-- <label for="username">Username:</label>
         <input type="text" name="username" required>
 
         <label for="password">Password:</label>
-        <input type="password" name="password" required>
+        <input type="password" name="password" required> -->
 
         <button type="submit">Login</button>
     </form>

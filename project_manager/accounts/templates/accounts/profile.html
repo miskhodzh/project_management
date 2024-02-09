@@ -1,0 +1,4 @@
+<h1>{{ request.user }}</h1>
+<h2>Дата регистрации: {{ request.user.date_joined }}</h2>
+<h2>Дата последнего входа: {{ request.user.last_login }}</h2>
+<a href="{% url 'accounts:logout' %}">Выйти</a>
