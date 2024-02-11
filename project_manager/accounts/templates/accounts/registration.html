@@ -62,9 +62,9 @@
     </style>
 </head>
 <body>
-    <form method="post" action="{% url 'accounts:login' %}" method="post">
+    <form method="post" action="{% url 'accounts:registration' %}" method="post">
         {% csrf_token %}
-        <h2>Login</h2>
+        <h2>Регистрация</h2>
 
         {% if error %}
             <p class="error">{{ error }}</p>
@@ -78,8 +78,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" required> -->
 
-        <button type="submit">Login</button>
-        <a href="{% url "accounts:registration" %}">Зарегистрироваться</a>
+        <button type="submit">Зарегистрироваться</button>
     </form>
 </body>
 </html>

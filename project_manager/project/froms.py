@@ -9,7 +9,6 @@ class ProjectForm(ModelForm):
             'title',
             'description',
             'date_created',
-            'owner'
         )
 
 

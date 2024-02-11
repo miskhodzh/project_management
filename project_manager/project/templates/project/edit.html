@@ -44,8 +44,10 @@
 
 </style>
 <a href="{% url "project:add_project" %}">К списку ваших проектов</a>
+<a href="{% url "accounts:index" %}">На главную</a>
 <div class="container">
     <div class="header">
+        <h1>{{user}}</h1>
         <h1>Редактирование проекта: {{project.title}}</h1>
     </div>
     <form class="form" action="{% url "project:edit_project" pk=project.id %}" method="post">

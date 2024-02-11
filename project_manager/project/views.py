@@ -11,7 +11,7 @@ class ProjectAdd(View):
 
     def get(self, request):
         form = ProjectForm()
-        projects = Project.objects.all()
+        projects = Project.objects.filter(owner=request.user.id)
         context = {
             'form': form,
             'projects': projects,
@@ -25,7 +25,7 @@ class ProjectAdd(View):
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             date_created = form.cleaned_data['date_created']
-            owner = form.cleaned_data['owner']
+            owner = request.user
 
             project = Project(
                 title=title,
@@ -47,7 +47,7 @@ class ProjectEdit(View):
         context = {
             'project': project,
             'form': form,
-            'tasks': tasks,
+            'tasks': tasks
         }
         return render(request, self.template, context)
 

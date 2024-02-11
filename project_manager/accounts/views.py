@@ -1,10 +1,11 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect,redirect
 from django.views import View
 from django.urls import reverse
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 
 
 
@@ -41,3 +42,19 @@ class Login(View):
                 login(request, user)
                 return HttpResponseRedirect(reverse('accounts:index'))
 
+
+class Registration(View):
+    template = 'accounts/registration.html'
+
+    def get(self, request):
+        form = UserCreationForm()
+        context = {
+            'form': form,
+        }
+        return render(request, self.template, context)
+    
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('accounts:login')
