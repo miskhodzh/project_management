@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавление проекта</title>
+</head>
+<body>
+    <style>
+        .container {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.form {
+    padding: 20px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form input, .form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.form textarea {
+    height: 100px;
+}
+
+.form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+    </style>
+    <div class="container">
+        <div class="header">
+            <h1>Добавление проекта</h1>
+        </div>
+        <div class="form">
+                <form action="{% url "project:add_project" %}" method="post">
+                    {% csrf_token %}
+                    <table>
+                        {{form}}
+                    </table>
+                <br>
+                <input type="submit" value="Добавить проект">
+            </form>
+        </div>
+        <div class="projectlist">
+            {% for project in projects %}
+            <ul>
+                <li>Название проекта: <a href="{% url "project:edit_project" pk=project.id %}">{{project.title}}</a></li>
+                <li>Описание проекта: {{project.description}}</li>
+                <li>Дата создания проекта: {{project.date_created}}</li>
+                <li>Владелец проекта: {{project.owner}}</li>
+            </ul>
+            {% endfor %}
+            
+        </div>
+    </div>
+</body>
+</html>
